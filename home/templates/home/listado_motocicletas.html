@@ -11,10 +11,20 @@
         <a href={% url 'crear_motocicletas' %}>Crear Motocicleta</a>
         <a href={% url 'listado_motocicletas' %}>Listado de Motocicletas</a>
     </nav>
-    <h1>Bienvenido a mi APP</h1>
-    <p></p>  
     
+    <h1>Listado de autos</h1>
+
+    {% if motocicletas %}
+    <ul>
+        {% for motocicleta in motocicletas%}
+        <li>
+            {{motocicleta}}
+        </li>
+        {% endfor %}    
+    </ul>
+    {% else %}
+        <p>No hay motocicletas registradas.</p>
+    {% endif %}
+
 </body>
 </html>
-
-

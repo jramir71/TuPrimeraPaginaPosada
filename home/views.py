@@ -25,9 +25,14 @@ def crear_motocicletas(request):
                                       precio=info.get('precio')
                                       )
             motocicleta.save()
-            return redirect('inicio')
+            return redirect('listado_motocicletas')
 
     else:
         formulario = CreacionMotocicleta()
 
     return render (request, 'home/crear_motocicletas.html', {'formulario': formulario})
+
+def listado_motocicletas(request):
+    motocicletas = Motocicleta.objects.all()
+    return render(request, 'home/listado_motocicletas.html', {'motocicletas': motocicletas})
+    return render(request, 'home/listado_motocicletas.html', {'motocicletas': motocicletas})
