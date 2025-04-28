@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    <h1>{{motocicleta}}</h1>
+    <p>Fecha: {{motocicleta.fecha_creacion}}</p>
+    <p>Marca: {{motocicleta.marca}}</p>
+    <p>Linea: {{motocicleta.linea}}</p>
+    <p>Modelo: {{motocicleta.modelo}}</p>
+    <p>Placa: {{motocicleta.placa}}</p>
+    <p>Chasis: {{motocicleta.chasis}}</p>
+    <p>Motor: {{motocicleta.motor}}</p>
+    <p>Precio: {{motocicleta.precio}}</p>
+
+{% endblock contenido%}

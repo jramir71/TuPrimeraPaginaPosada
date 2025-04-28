@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <a href={% url 'inicio' %}>Inicio</a>
-        <a href={% url 'crear_motocicletas' %}>Crear Motocicleta</a>
-        <a href={% url 'listado_motocicletas' %}>Listado de Motocicletas</a>
-    </nav>
+{% extends 'base.html' %}
+
+{% block contenido %}
+
     
-    <h1>Listado de Motocicletas</h1>
+<h1>Listado de Motocicletas</h1>
+<p>
+    <a href={% url 'crear_motocicletas' %}>Crear Motocicleta</a>
+</p>
 
-    {% if motocicletas %}
-    <ul>
-        {% for motocicleta in motocicletas%}
-        <li>
-            {{motocicleta}}
-        </li>
-        {% endfor %}    
-    </ul>
-    {% else %}
-        <p>No hay motocicletas registradas.</p>
-    {% endif %}
+{% if motocicletas %}
+<ul>
+    {% for motocicleta in motocicletas%}
+    <li>
+        {{motocicleta}} 
+        | <a href={% url "detalle_motocicletas" motocicleta.id %}>Ver mas</a> 
+        | <a href={% url "modificar_motocicletas" motocicleta.id %}>Modificar</a>
+        | <a href={% url "eliminar_motocicletas" motocicleta.id %}>Eliminar</a>
+    </li>
+    {% endfor %}    
+</ul>
+{% else %}
+    <p>No hay motocicletas registradas.</p>
+{% endif %}
 
-</body>
-</html>
+
+{% endblock contenido%}
+

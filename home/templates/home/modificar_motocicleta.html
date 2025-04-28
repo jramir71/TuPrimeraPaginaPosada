@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+<h1>Modificar {{motocicleta}}</h1>
+<form action="{% url 'modificar_motocicletas' motocicleta.id %}" method="POST">
+    {% csrf_token %}
+
+    {{form}}
+
+    <input type="submit" value="Modificar Motocicleta">
+
+</form>
+
+
+{% endblock contenido%}
+

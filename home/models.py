@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Motocicleta(models.Model):
+    fecha_creacion = models.DateField(null=True)
     marca = models.CharField(max_length=100)
     linea = models.CharField(max_length=100)
     modelo = models.IntegerField()
