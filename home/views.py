@@ -5,11 +5,15 @@ from home.models import Motocicleta
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     #return HttpResponse('<h1>Hola, esta es la página de inicio de mi proyecto Django</h1>')
     return render(request, 'home/inicio.html')
 
+
+@login_required
 def crear_motocicletas(request):
 
     print('ESTOS SON LOS DATOS DEL GET ---->>', request.GET)
@@ -36,6 +40,7 @@ def crear_motocicletas(request):
 
     return render (request, 'home/crear_motocicletas.html', {'formulario': formulario})
 
+@login_required
 def listado_motocicletas(request):
     motocicletas = Motocicleta.objects.all()
     return render(request, 'home/listado_motocicletas.html', {'motocicletas': motocicletas})
@@ -48,13 +53,13 @@ class VistaDetalleMotocicleta (DetailView):
     model = Motocicleta
     template_name = 'home/detalle_motocicleta.html'
 
-class VistaModificarMotocicleta (UpdateView):
+class VistaModificarMotocicleta (LoginRequiredMixin, UpdateView):
     model = Motocicleta
     template_name = 'home/modificar_motocicleta.html'
     fields = ['fecha_creacion', 'marca', 'linea', 'modelo', 'placa', 'chasis', 'motor', 'precio']
     success_url = reverse_lazy('listado_motocicletas')
 
-class VistaEliminarMotocicleta (DeleteView):
+class VistaEliminarMotocicleta (LoginRequiredMixin, DeleteView):
     model = Motocicleta
     template_name = 'home/eliminar_motocicleta.html'
     success_url = reverse_lazy('listado_motocicletas')

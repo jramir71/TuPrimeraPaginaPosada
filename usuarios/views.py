@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login as django_login 
 from django.contrib import messages
+from usuarios.forms import FormularioRegistro
 
 def login(request):
 
@@ -24,12 +25,12 @@ def login(request):
 
 def registro(request):
     if request.method == 'POST':
-        formulario = UserCreationForm(request.POST)
+        formulario = FormularioRegistro(request.POST)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, 'Usuario creado correctamente')
             return redirect('login')
     else:
-        formulario = UserCreationForm()
+        formulario = FormularioRegistro()
     
     return render(request, 'usuarios/registro.html', {'formulario': formulario})
