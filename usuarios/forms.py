@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class FormularioRegistro(UserCreationForm):
@@ -12,4 +12,15 @@ class FormularioRegistro(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         help_texts = {key: "" for key in fields}
-    
+
+class FormularioEdicionPerfil(UserChangeForm):
+    password = None  # No mostrar el campo de contraseña en el formulario
+    email = forms.EmailField(label='Email', required=False)
+    first_name = forms.CharField(label='Nombre')
+    last_name = forms.CharField(label='Apellido')
+    avatar = forms.ImageField(required=False)
+
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'avatar']
+        #help_texts = {key: "" for key in fields}

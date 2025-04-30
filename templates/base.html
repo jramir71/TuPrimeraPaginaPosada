@@ -32,7 +32,11 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'listado_motocicletas' %}>Motocicletas</a></li>
                         {% if request.user.is_authenticated %}
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#"> {{request.user.username}} </a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'editar_perfil' %}> 
+                            {% if request.user.infoextra.avatar.url %} 
+                            <img src = "{{ request.user.infoextra.avatar.url }}" alt="" height="40px">
+                            {% endif %}
+                            {{request.user.username}} </a></li>
                         <form action = {% url 'logout' %} method="POST">
                             {% csrf_token %}
                             <input class="btn btn-danger" type="submit" value="Logout">
